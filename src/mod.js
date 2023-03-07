@@ -13,8 +13,7 @@ export function pokiPlugin() {
 
 			const sdkUrl = "https://game-cdn.poki.com/scripts/v2/poki-sdk.js";
 			await import(sdkUrl);
-			window.location
-			await PokiSDK.init({debug: true});
+			await PokiSDK.init();
 		},
 		async loadStop() {
 			if (loadFinishCalled) return;
@@ -32,7 +31,7 @@ export function pokiPlugin() {
 			return {
 				didShowAd: null,
 				errorReason: null,
-			}
+			};
 		},
 		async showRewardedAd() {
 			const didShowAd = await PokiSDK.rewardedBreak();
@@ -45,7 +44,7 @@ export function pokiPlugin() {
 			return {
 				didShowAd,
 				errorReason,
-			}
+			};
 		},
 	};
 
