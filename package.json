@@ -1,0 +1,20 @@
+{
+	"name": "@adlad/plugin-poki",
+	"version": "0.0.3",
+	"description": "AdLad plugin for the Poki sdk.",
+	"main": "mod.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Pelican-Party/adlad-plugin-poki.git"
+	},
+	"keywords": [
+		"ads",
+		"poki"
+	],
+	"author": "Pelican Party Studios",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Pelican-Party/adlad-plugin-poki/issues"
+	},
+	"homepage": "https://github.com/Pelican-Party/adlad-plugin-poki#readme"
+}
