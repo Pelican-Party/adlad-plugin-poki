@@ -3,6 +3,6 @@ declare class PokiSDK {
 	static gameLoadingFinished(): void;
 	static gameplayStart(): void;
 	static gameplayStop(): void;
-	static commercialBreak(): Promise<void>;
-	static rewardedBreak(): Promise<boolean>;
+	static commercialBreak(breakStartCallback?: () => void): Promise<void>;
+	static rewardedBreak(breakStartCallback?: () => void): Promise<boolean>;
 }
