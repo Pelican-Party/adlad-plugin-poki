@@ -3,6 +3,7 @@
 	"version": "0.0.3",
 	"description": "AdLad plugin for the Poki sdk.",
 	"main": "mod.js",
+	"types": "dist/adlad-plugin-poki.d.ts",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/Pelican-Party/adlad-plugin-poki.git"

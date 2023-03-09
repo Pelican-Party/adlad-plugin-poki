@@ -27,7 +27,8 @@
 	"lint": {
 		"files": {
 			"exclude": [
-				".denoTypes"
+				".denoTypes",
+				"dist"
 			]
 		},
 		"rules": {
