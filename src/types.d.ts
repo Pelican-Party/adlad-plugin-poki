@@ -5,4 +5,5 @@ declare class PokiSDK {
 	static gameplayStop(): void;
 	static commercialBreak(breakStartCallback?: () => void): Promise<void>;
 	static rewardedBreak(breakStartCallback?: () => void): Promise<boolean>;
+	static displayAd(el: HTMLElement, size: string): void;
 }

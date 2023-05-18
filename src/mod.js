@@ -77,6 +77,29 @@ export function pokiPlugin() {
 				errorReason,
 			};
 		},
+		showBannerAd(options) {
+			const availableSizes = [
+				{ w: 728, h: 90 },
+				{ w: 300, h: 250 },
+				{ w: 970, h: 250 },
+				{ w: 160, h: 600 },
+				{ w: 320, h: 50 },
+			];
+			let biggest = null;
+			let biggestSize = 0;
+			for (const size of availableSizes) {
+				if (size.w > options.width) continue;
+				if (size.h > options.height) continue;
+				const total = size.w * size.h;
+				if (total > biggestSize) {
+					biggestSize = total;
+					biggest = size;
+				}
+			}
+			if (!biggest) return;
+			const size = biggest.w + "x" + biggest.h;
+			PokiSDK.displayAd(options.el, size);
+		},
 	};
 
 	return plugin;
