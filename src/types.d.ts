@@ -6,4 +6,6 @@ declare class PokiSDK {
 	static commercialBreak(breakStartCallback?: () => void): Promise<void>;
 	static rewardedBreak(breakStartCallback?: () => void): Promise<boolean>;
 	static displayAd(el: HTMLElement, size: string): void;
+	static shareableURL(params: Record<string, string>): Promise<string>;
+	static getURLParam(param: string): Promise<string>;
 }

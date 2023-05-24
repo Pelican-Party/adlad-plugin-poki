@@ -99,6 +99,26 @@ export function pokiPlugin() {
 			const size = biggest.w + "x" + biggest.h;
 			PokiSDK.displayAd(options.el, size);
 		},
+		customRequests: {
+			/**
+			 * @param {ConstructorParameters<typeof URLSearchParams>} args
+			 */
+			async getShareableUrl(...args) {
+				const urlParams = new URLSearchParams(...args);
+				/** @type {Object.<string, string>} */
+				const paramsObj = {};
+				for (const [key, value] of urlParams.entries()) {
+					paramsObj[key] = value;
+				}
+				return await PokiSDK.shareableURL(paramsObj);
+			},
+			/**
+			 * @param {string} param
+			 */
+			getUrlParam(param) {
+				return PokiSDK.getURLParam(param);
+			},
+		},
 	});
 
 	return plugin;
