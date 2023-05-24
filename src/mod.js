@@ -5,8 +5,7 @@ export function pokiPlugin() {
 	/** @type {import("$adlad").AdLadPluginInitializeContext} */
 	let context;
 
-	/** @type {import("$adlad").AdLadPlugin} */
-	const plugin = {
+	const plugin = /** @type {const} @satisfies {import("$adlad").AdLadPlugin} */ ({
 		name: "poki",
 		async initialize(ctx) {
 			if (initializeCalled) {
@@ -100,7 +99,7 @@ export function pokiPlugin() {
 			const size = biggest.w + "x" + biggest.h;
 			PokiSDK.displayAd(options.el, size);
 		},
-	};
+	});
 
 	return plugin;
 }
