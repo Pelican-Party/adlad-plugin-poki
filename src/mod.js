@@ -98,6 +98,9 @@ export function pokiPlugin() {
 			const size = biggest.w + "x" + biggest.h;
 			PokiSDK.displayAd(options.el, size);
 		},
+		destroyBannerAd(options) {
+			PokiSDK.destroyAd(options.el);
+		},
 		customRequests: {
 			/**
 			 * @param {ConstructorParameters<typeof URLSearchParams>} args
