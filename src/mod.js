@@ -14,8 +14,7 @@ export function pokiPlugin() {
 			initializeCalled = true;
 
 			context = ctx;
-			const sdkUrl = "https://game-cdn.poki.com/scripts/v2/poki-sdk.js";
-			await import(sdkUrl);
+			await ctx.loadScriptTag("https://game-cdn.poki.com/scripts/v2/poki-sdk.js");
 			await PokiSDK.init();
 		},
 		manualNeedsMute: true,
