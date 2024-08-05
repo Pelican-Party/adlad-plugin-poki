@@ -1,6 +1,6 @@
 {
 	"name": "@adlad/plugin-poki",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"description": "AdLad plugin for the Poki sdk.",
 	"main": "mod.js",
 	"types": "dist/adlad-plugin-poki.d.ts",
