@@ -2,6 +2,29 @@ export function pokiPlugin() {
 	let initializeCalled = false;
 	let loadFinishCalled = false;
 
+	const props = /** @type {const} */ ({
+		init: "init",
+		gameLoadingFinished: "gameLoadingFinished",
+		gameplayStart: "gameplayStart",
+		gameplayStop: "gameplayStop",
+		commercialBreak: "commercialBreak",
+		rewardedBreak: "rewardedBreak",
+		displayAd: "displayAd",
+		destroyAd: "destroyAd",
+		shareableURL: "shareableURL",
+		getURLParam: "getURLParam",
+	});
+
+	// @ts-ignore We want to make sure that `props` remains an object.
+	// Normally, terser would turn every property into a separate variable.
+	// This would be fine for the first pass of minification, but if a user
+	// were to bundle and minify this libarry with their own code, they will minify a second time
+	// causing all these props to lose their quotes.
+	// This can be an issue if the new bundle has property mangling enabled.
+	// This if statement will never run, but rollup and terser will both think it
+	// might and so the `props` opbject will remain an object.
+	if (props > 0) console.log(props);
+
 	/** @type {import("$adlad").AdLadPluginInitializeContext} */
 	let context;
 
@@ -15,26 +38,26 @@ export function pokiPlugin() {
 
 			context = ctx;
 			await ctx.loadScriptTag("https://game-cdn.poki.com/scripts/v2/poki-sdk.js");
-			await PokiSDK.init();
+			await PokiSDK[props.init]();
 		},
 		manualNeedsMute: true,
 		async loadStop() {
 			if (loadFinishCalled) return;
 			loadFinishCalled = true;
-			PokiSDK.gameLoadingFinished();
+			PokiSDK[props.gameLoadingFinished]();
 		},
 		async gameplayStart() {
-			PokiSDK.gameplayStart();
+			PokiSDK[props.gameplayStart]();
 		},
 		async gameplayStop() {
-			PokiSDK.gameplayStop();
+			PokiSDK[props.gameplayStop]();
 		},
 		async showFullScreenAd() {
 			let didShowAd = false;
 			/** @type {import("$adlad").AdErrorReason?} */
 			let errorReason = null;
 			try {
-				await PokiSDK.commercialBreak(() => {
+				await PokiSDK[props.commercialBreak](() => {
 					didShowAd = true;
 					context.setNeedsMute(true);
 				});
@@ -59,7 +82,7 @@ export function pokiPlugin() {
 			/** @type {import("$adlad").AdErrorReason?} */
 			let errorReason = null;
 			try {
-				didShowAd = await PokiSDK.rewardedBreak(() => {
+				didShowAd = await PokiSDK[props.rewardedBreak](() => {
 					context.setNeedsMute(true);
 				});
 			} catch (e) {
@@ -96,10 +119,10 @@ export function pokiPlugin() {
 			}
 			if (!biggest) return;
 			const size = biggest.w + "x" + biggest.h;
-			PokiSDK.displayAd(options.el, size);
+			PokiSDK[props.displayAd](options.el, size);
 		},
 		destroyBannerAd(options) {
-			PokiSDK.destroyAd(options.el);
+			PokiSDK[props.destroyAd](options.el);
 		},
 		customRequests: {
 			/**
@@ -112,13 +135,13 @@ export function pokiPlugin() {
 				for (const [key, value] of urlParams.entries()) {
 					paramsObj[key] = value;
 				}
-				return await PokiSDK.shareableURL(paramsObj);
+				return await PokiSDK[props.shareableURL](paramsObj);
 			},
 			/**
 			 * @param {string} param
 			 */
 			getUrlParam(param) {
-				return PokiSDK.getURLParam(param);
+				return PokiSDK[props.getURLParam](param);
 			},
 		},
 	});
