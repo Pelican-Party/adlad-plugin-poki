@@ -2,6 +2,7 @@ name: Publish package to npmjs
 on:
   release:
     types: [published]
+  workflow_dispatch:
 jobs:
   npmrelease:
     runs-on: ubuntu-latest
