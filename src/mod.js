@@ -13,6 +13,7 @@ export function pokiPlugin() {
 		destroyAd: "destroyAd",
 		shareableURL: "shareableURL",
 		getURLParam: "getURLParam",
+		playtestSetCanvas: "playtestSetCanvas",
 	});
 
 	// @ts-ignore We want to make sure that `props` remains an object.
@@ -142,6 +143,12 @@ export function pokiPlugin() {
 			 */
 			getUrlParam(param) {
 				return PokiSDK[props.getURLParam](param);
+			},
+			/**
+			 * @param {HTMLCanvasElement} canvas
+			 */
+			playtestSetCanvas(canvas) {
+				PokiSDK[props.playtestSetCanvas](canvas);
 			},
 		},
 	});

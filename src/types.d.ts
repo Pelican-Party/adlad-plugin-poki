@@ -9,4 +9,5 @@ declare class PokiSDK {
 	static destroyAd(el: HTMLElement): void;
 	static shareableURL(params: Record<string, string>): Promise<string>;
 	static getURLParam(param: string): Promise<string>;
+	static playtestSetCanvas(canvas: HTMLCanvasElement): void;
 }
