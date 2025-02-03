@@ -14,6 +14,8 @@ export function pokiPlugin() {
 		shareableURL: "shareableURL",
 		getURLParam: "getURLParam",
 		playtestSetCanvas: "playtestSetCanvas",
+		onStart: "onStart",
+		size: "size",
 	});
 
 	// @ts-ignore We want to make sure that `props` remains an object.
@@ -78,13 +80,20 @@ export function pokiPlugin() {
 				errorReason,
 			};
 		},
-		async showRewardedAd() {
+		/**
+		 * @param {Object} [options]
+		 * @param {"small" | "medium" | "large"} [options.size]
+		 */
+		async showRewardedAd({ size } = {}) {
 			let didShowAd = false;
 			/** @type {import("$adlad").AdErrorReason?} */
 			let errorReason = null;
 			try {
-				didShowAd = await PokiSDK[props.rewardedBreak](() => {
-					context.setNeedsMute(true);
+				didShowAd = await PokiSDK[props.rewardedBreak]({
+					[props.size]: size,
+					[props.onStart]: () => {
+						context.setNeedsMute(true);
+					},
 				});
 			} catch (e) {
 				console.warn("PokiSDK rewardedBreak call was rejected", e);
