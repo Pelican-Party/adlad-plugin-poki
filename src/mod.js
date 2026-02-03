@@ -159,6 +159,23 @@ export function pokiPlugin() {
 			playtestSetCanvas(canvas) {
 				PokiSDK[props.playtestSetCanvas](canvas);
 			},
+			/**
+			 * @param {URL | string} url
+			 */
+			openExternalUrl(url) {
+				try {
+					let urlString;
+					if (url instanceof URL) {
+						urlString = url.href;
+					} else {
+						urlString = url;
+					}
+					PokiSDK.openExternalLink(urlString);
+				} catch (error) {
+					console.error(error);
+					window.open(url, "_blank", "noopener,noreferrer");
+				}
+			},
 		},
 	});
 

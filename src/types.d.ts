@@ -15,4 +15,5 @@ declare class PokiSDK {
 	static shareableURL(params: Record<string, string>): Promise<string>;
 	static getURLParam(param: string): Promise<string>;
 	static playtestSetCanvas(canvas: HTMLCanvasElement): void;
+	static openExternalLink(url: string): void;
 }
